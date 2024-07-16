@@ -7,8 +7,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(bodyParser.json());
-app.use("/workouts", workoutRoutes);
-app.use("/users", userRoutes);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 app.use(cors());
@@ -23,6 +22,8 @@ db.once("open", () => {
   console.log("Connected to MongoDB");
 });
 
+app.use("/workouts", workoutRoutes);
+app.use("/users", userRoutes);
 
 if (require.main === module) {
   const PORT = process.env.PORT || 4000;
